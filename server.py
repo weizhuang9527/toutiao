@@ -73,7 +73,7 @@ def api_data_api():
 @app.route('/api/get', methods=['GET'])
 def api_get_api():
     now = datetime.now()
-    three_min_time = now - timedelta(minutes=5)
+    three_min_time = now - timedelta(minutes=10)
     timestamp = int(time.mktime(three_min_time.timetuple()))
     # print(timestamp)
     article = Article.query.filter(Article.publish_timestamp > timestamp,
