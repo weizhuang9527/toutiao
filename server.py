@@ -85,6 +85,173 @@ def api_get_api():
     article.is_used()
     return wrap_true(msg='获取成功', data={"title": article.title, "url": article.url})
 
+@app.route('/api/message/unread')
+def api_getlist():
+    data = {
+        "state": 1,
+        "msg": "获取数据成功",
+        "data": {
+            "count": 74,
+            "list": [{
+                "id": 1658,
+                "title": "文章<我艹你奶奶个腿>审核未通过，文章<我艹你奶奶个腿>审核未通过",
+                "url": "/message/1658"
+            }, {
+                "id": 1653,
+                "title": "文章完结通知",
+                "url": "/message/1653"
+            }, {
+                "id": 1621,
+                "title": "文章完结通知",
+                "url": "/message/1621"
+            }, {
+                "id": 1623,
+                "title": "文章完结通知",
+                "url": "/message/1623"
+            }, {
+                "id": 1580,
+                "title": "文章完结通知",
+                "url": "/message/1580"
+            }]
+        }
+    }
+    return jsonify(data)
+
+
+@app.route('/api/task/manage/list')
+def writer_getlist():
+    data = {
+        "state": 1,
+        "msg": "获取数据成功",
+        "data": {
+            "count": 74,
+            "list": [{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-11-02 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "ready",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": ""  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价回收旧电脑洗衣机电饭煲冰箱彩电游戏机",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            },{
+                "id": "1658",  # 任务单ID
+                "title": "高价回收旧电脑洗衣机电饭煲冰箱彩电游戏机",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "end_at": "2018-10-28 12:00:01",  # 结束时间
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658",  # 任务具体地址
+                "status": "save",  # 状态 ready准备期 save保存 review提交审核中 pass通过完结 edit撤回修改 refuse拒绝
+                "article_id": "10313"  # 对应文章ID ready准备期没有文章ID
+            }]
+        }
+    }
+    time.sleep(1)
+    return jsonify(data)
+
+
+@app.route('/api/task/platform/list')
+def writer_platform_getlist():
+    data = {
+        "state": 1,
+        "msg": "获取数据成功",
+        "data": {
+            "count": 74,
+            "list": [{
+                "id": "1658",  # 任务ID
+                "title": "高价收历史文章 1元/100字",  # 任务标题
+                "tags": ["字数:100", "领域:历史"],  # 任务标签
+                "cut_off_at": "2018-10-28 12:00:01",  # 截止时间
+                "still_need_num":3,  # 还需求篇数
+                "point": 114,  # 积分 已扣抽成后
+                "point_deposit": 12,  # 押金 积分*0.1 向上取整
+                "url": "/message/1658"  # 任务具体地址
+            }]
+        }
+    }
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=33301, ssl_context='adhoc')
