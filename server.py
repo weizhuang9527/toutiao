@@ -32,9 +32,9 @@ def wrap_false(msg):
     })
 
 
-@app.route('/test')
-def test_view():
-    return "11"
+@app.route('/')
+def index():
+    return 'Welcome to ccl server'
 
 
 @app.route('/api/data', methods=['POST'])
