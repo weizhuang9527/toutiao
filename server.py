@@ -254,7 +254,7 @@ def writer_platform_getlist():
     return jsonify(data)
 
 
-@app.route("/user/task/submit", methods=['POST'])
+@app.route("/api/task/submit", methods=['POST'])
 def task_submit_api():
     # 任务标题
     title = request.values.get('title')
