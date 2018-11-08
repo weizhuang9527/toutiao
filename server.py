@@ -253,5 +253,52 @@ def writer_platform_getlist():
     }
     return jsonify(data)
 
+
+@app.route("/user/task/submit", methods=['POST'])
+def task_submit_api():
+    # 任务标题
+    title = request.values.get('title')
+    # 任务内容
+    content = request.values.get('content')
+    # 任务标签
+    tags = request.values.get('tag_list')
+    try:
+        # 任务定价
+        point = int(request.values.get('point'))
+        # 任务需求
+        num = int(request.values.get('number'))
+        # 截止日期
+        need_day = int(request.values.get('need_day'))
+        point_all = int(request.values.get('point_all'))
+    except ValueError:
+        return wrap_true(msg='参数必须为整数')
+
+    if not title:
+        return wrap_false(msg='标题不能为空')
+    if len(title) > 30:
+        return wrap_false(msg='标题不能超过30个字')
+    if not content:
+        return wrap_false(msg='内容不能为空')
+    tags_list = tags.split(',')
+    for tag in tags_list:
+        if len(tag) > 10:
+            return wrap_false(msg='标签长度不能大于10')
+    if len(tags_list) > 5:
+        return wrap_false(msg='标签数不能大于5个')
+    if point <= 0:
+        return wrap_false(msg='定价不得小于零')
+    if num < 1:
+        return wrap_false(msg='需求篇数不得少于1篇')
+    if not 1 < need_day < 999:
+        return wrap_false(msg='需求时间错误')
+    if point_all != point * num:
+        return wrap_false(msg='总计积分验证错误')
+
+    # 计算需求时间
+    cut_off_at = int(time.time()) + need_day * 24 * 60 * 60
+
+    print(title, content, tags_list, cut_off_at, point, num, point_all)
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=33301, ssl_context='adhoc')
+    app.run(host='0.0.0.0', port=33301)
