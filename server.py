@@ -10,6 +10,7 @@ from exts import db
 from models import Article
 from datetime import datetime, timedelta
 import time
+import json
 
 app = Flask(__name__)
 app.config.from_object(config)
@@ -257,21 +258,19 @@ def writer_platform_getlist():
 @app.route("/api/task/submit", methods=['POST'])
 def task_submit_api():
     # 任务标题
-    title = request.values.get('title')
+    title = request.json.get('title')
     # 任务内容
-    content = request.values.get('content')
+    content = request.json.get('content')
     # 任务标签
-    tags = request.values.get('tag_list')
-    try:
-        # 任务定价
-        point = int(request.values.get('point'))
-        # 任务需求
-        num = int(request.values.get('number'))
-        # 截止日期
-        need_day = int(request.values.get('need_day'))
-        point_all = int(request.values.get('point_all'))
-    except ValueError:
-        return wrap_true(msg='参数必须为整数')
+    tags = request.json.get('tag_list')
+    # 截止日期
+    need_day = request.json.get('need_day')
+    # 任务定价
+    point = request.json.get('point')
+    # 任务需求
+    num = int(request.json.get('number'))
+    # 总计积分
+    point_all = int(request.json.get('point_all'))
 
     if not title:
         return wrap_false(msg='标题不能为空')
@@ -279,17 +278,16 @@ def task_submit_api():
         return wrap_false(msg='标题不能超过30个字')
     if not content:
         return wrap_false(msg='内容不能为空')
-    tags_list = tags.split(',')
-    for tag in tags_list:
+    if len(tags) > 5:
+        return wrap_false(msg='标签数不能大于5个')
+    for tag in tags:
         if len(tag) > 10:
             return wrap_false(msg='标签长度不能大于10')
-    if len(tags_list) > 5:
-        return wrap_false(msg='标签数不能大于5个')
     if point <= 0:
         return wrap_false(msg='定价不得小于零')
     if num < 1:
         return wrap_false(msg='需求篇数不得少于1篇')
-    if not 1 < need_day < 999:
+    if not 1 <= need_day <= 999:
         return wrap_false(msg='需求时间错误')
     if point_all != point * num:
         return wrap_false(msg='总计积分验证错误')
@@ -297,8 +295,12 @@ def task_submit_api():
     # 计算需求时间
     cut_off_at = int(time.time()) + need_day * 24 * 60 * 60
 
-    print(title, content, tags_list, cut_off_at, point, num, point_all)
+    print(title, content, tags, cut_off_at, point, num, point_all)
 
+
+    data = json.dumps({'state': -1, 'msg': "获取数据成功", 'data': {}})
+    return data
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=33301)
+    #app.run(host='0.0.0.0', port=33301)
+    app.run(host='0.0.0.0', port=33301, ssl_context='adhoc')
